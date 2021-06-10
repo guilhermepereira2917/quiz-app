@@ -1,0 +1,34 @@
+:root {
+    --green: #caf7e3;
+    --light-pink: #f8eded;
+    --medium-pink: #f6dfeb;
+    --dark-pink: #e4bad4;
+}
+
+table {
+    font-family: 'Poppins';
+    width: clamp(20vw, 30vw, 70vw);
+    margin: auto;
+    margin-top: 2em;
+}
+
+thead {
+    margin-bottom: 1em;
+    background-color: var(--dark-pink);
+}
+
+tbody {
+    background-color: var(--medium-pink);
+}
+
+th {
+    font-size: 1.25em;
+}
+
+td {
+    text-align: center;
+}
+
+#title {
+    font-size: 1.5em;
+}

@@ -1,8 +1,10 @@
 const express = require('express')
 const app = express()
+const Datastore = require('nedb')
 const port = 80
 
-let data = []
+const database = new Datastore('/public/leaderboard.db')
+database.loadDatabase()
 
 app.listen(port, () => {
     console.log('listening at port ' + port)
@@ -23,14 +25,19 @@ app.post('/leaderboard', (request, response) => {
         rightAnswers: rightAnswers
     }
 
-    data.push(user)
+    database.insert(user)
 
-    console.log(data)
     response.json(user)
 })
 
 app.get('/leaderboard', (request, response) => {
-    response.json(data)
+    database.find({}, (err, data) => {
+        if (err) {
+            response.end()
+            return
+        }
+        response.json(data)
+    })
 })
 
 function checkRightAnswers(rightIndexes, userIndexes) {

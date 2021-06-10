@@ -105,4 +105,5 @@ async function submitNameAndScore() {
     const json = await response.json()
     console.log(json)
     alert(`Você acertou ${json.rightAnswers}/${json.answersIndex.length} questões`)
+
 }

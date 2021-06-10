@@ -18,7 +18,31 @@ body {
     background-color: var(--light-pink);
 }
 
-.question-container, .name {
+a {
+    font-family: 'Poppins';
+    text-align: center;
+    margin: 1em auto 3em auto;
+    color: black;
+}
+
+input, button {
+    cursor: pointer;
+}
+
+.name-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.125em;
+}
+
+.name-container input {
+    height: 2em;
+    width: 24em;
+    margin-left: 3px;
+}
+
+.question-container, .name-container {
     width: clamp(30vw, 40vw, 70vw);
     margin: auto;
     margin-top: 1em;
@@ -57,7 +81,7 @@ body {
 
 button {
     width: clamp(300, 400, 500);
-    margin: 2em auto;
+    margin: 2em auto 0 auto;
 
     color: black;
     font-size: 1.5rem;
