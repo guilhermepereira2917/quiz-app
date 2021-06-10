@@ -12,12 +12,31 @@ app.use(express.static('public'))
 
 app.post('/leaderboard', (request, response) => {
     console.log('I got a request')
-    data.push(request.body)
+
+    const answersIndex = [3, 3, 2, 3, 0]
+    const userIndexes = request.body.answersIndex
+    const rightAnswers = checkRightAnswers(answersIndex, userIndexes)
+
+    const user = {
+        name: request.body.name,
+        answersIndex: userIndexes,
+        rightAnswers: rightAnswers
+    }
+
+    data.push(user)
 
     console.log(data)
+    response.json(user)
+})
+
+app.get('/leaderboard', (request, response) => {
     response.json(data)
 })
 
-app.get ('/leaderboard', (request, response) => {
-    response.json(data)
-})
+function checkRightAnswers(rightIndexes, userIndexes) {
+    let rightAnswers = 0
+    for (let i = 0; i < rightIndexes.length; i++)
+        if (rightIndexes[i] == userIndexes[i])
+            rightAnswers++
+    return rightAnswers
+}

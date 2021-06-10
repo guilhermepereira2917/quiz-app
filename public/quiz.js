@@ -1,23 +1,18 @@
 const questions = [{
     title: 'Atualmente, quantos elementos químicos a tabela periódica possui?',
-    alternatives: ['113', '109', '108', '118', '92'],
-    answerIndex: 3
+    alternatives: ['113', '109', '108', '118', '92']
 }, {
     title: 'Quanto tempo a luz do Sol demora para chegar à Terra?',
-    alternatives: ['12 minutos', '1 dia', '12 horas', '8 minutos', 'segundos'],
-    answerIndex: 3
+    alternatives: ['12 minutos', '1 dia', '12 horas', '8 minutos', 'segundos']
 }, {
     title: 'Quais são os três predadores do reino animal reconhecidos pela habilidade de caçar em grupo, se camuflar para surpreender as presas e possuir sentidos apurados, respectivamente',
-    alternatives: ['Tubarão branco, crocodilo e sucuri', 'Tigre, gavião e orca', 'Hiena, urso branco e lobo cinzento', 'Orca, onça e tarântula', 'Leão, tubarão branco e urso cinzento'],
-    answerIndex: 2
+    alternatives: ['Tubarão branco, crocodilo e sucuri', 'Tigre, gavião e orca', 'Hiena, urso branco e lobo cinzento', 'Orca, onça e tarântula', 'Leão, tubarão branco e urso cinzento']
 }, {
     title: 'Qual a velocidade da luz?',
-    alternatives: ['300 000 000 metros por segundo (m/s)', '150 000 000 metros por segundo (m/s)', '199 792 458 metros por segundo (m/s)', '299 792 458 metros por segundo (m/s)', '30 000 000 metros por segundo (m/s)'],
-    answerIndex: 3
+    alternatives: ['300 000 000 metros por segundo (m/s)', '150 000 000 metros por segundo (m/s)', '199 792 458 metros por segundo (m/s)', '299 792 458 metros por segundo (m/s)', '30 000 000 metros por segundo (m/s)']
 }, {
     title: 'Qual a montanha mais alta do Brasil?',
-    alternatives: ['Pico da Neblina', 'Pico Paraná', 'Monte Roraima', 'Pico Maior de Friburgo', 'Pico da Bandeira'],
-    answerIndex: 0
+    alternatives: ['Pico da Neblina', 'Pico Paraná', 'Monte Roraima', 'Pico Maior de Friburgo', 'Pico da Bandeira']
 }]
 
 renderQuiz();
@@ -63,7 +58,7 @@ function renderQuiz() {
 }
 
 let name,
-    rightAnswers
+    answersIndex
 
 function checkNameAndAnswers() {
 
@@ -74,7 +69,7 @@ function checkNameAndAnswers() {
         return
     }
 
-    let answersIndex = []
+    answersIndex = []
 
     for (let i = 0; i < questions.length; i++) {
         const alternatives = document.getElementsByName('answer' + i)
@@ -88,12 +83,6 @@ function checkNameAndAnswers() {
         alert('Assinale todas as questões')
         return
     } else {
-        rightAnswers = 0
-        for (let i = 0; i < answersIndex.length; i++)
-            if (answersIndex[i] == questions[i].answerIndex)
-                rightAnswers++
-
-        alert(`You got ${rightAnswers}/${answersIndex.length} answers right!`)
         submitNameAndScore()
     }
 }
@@ -101,7 +90,7 @@ function checkNameAndAnswers() {
 async function submitNameAndScore() {
     const data = {
         name,
-        rightAnswers
+        answersIndex
     }
 
     const options = {
@@ -113,5 +102,7 @@ async function submitNameAndScore() {
     }
 
     const response = await fetch('/leaderboard', options)
-    console.log('You submited your data!')
+    const json = await response.json()
+    console.log(json)
+    alert(`Você acertou ${json.rightAnswers}/${json.answersIndex.length} questões`)
 }
