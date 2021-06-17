@@ -3,7 +3,7 @@ const app = express()
 const Datastore = require('nedb')
 const port = 80
 
-const database = new Datastore('/public/leaderboard.db')
+const database = new Datastore('./leaderboard.db')
 database.loadDatabase()
 
 app.listen(port, () => {

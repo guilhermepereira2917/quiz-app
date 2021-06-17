@@ -13,6 +13,7 @@
 }
 
 body {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     background-color: var(--light-pink);
@@ -38,14 +39,15 @@ input, button {
 
 .name-container input {
     height: 2em;
-    width: 24em;
+    width: 22em;
     margin-left: 3px;
 }
 
 .question-container, .name-container {
-    width: clamp(30vw, 40vw, 70vw);
+    width: 720px;
+    max-width: 90vw;
     margin: auto;
-    margin-top: 1em;
+    margin-top: 1.5em;
 
     background-color: var(--medium-pink);
     padding: 1em 4em 1.5em 4em;
